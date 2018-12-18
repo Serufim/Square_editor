@@ -82,8 +82,8 @@ class Editor {
 
     createSquare(e) {
         //Создаем квадрат
-        width = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
-        color = this.getRandomColor();
+        let width = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
+        let color = this.getRandomColor();
 
         //Рисуем квадрат
         const cords = this.getCursorPosition(e);
