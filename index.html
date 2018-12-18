@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактор квадратов имени Льва Стоянова</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Редактор квадратов</h1>
+        <div class="editor-settings">
+            <h2 class="editor-settings__title">Настройки</h2>
+            <div class="editor-settings__form-group form-group">
+                <label for="square-width">Ширина</label>
+                <input type="text" id="square-width">
+            </div>
+            <div class="editor-settings__form-group form-group">
+                <label for="square-height">Высота</label>
+                <input type="text" id="square-height">
+            </div>
+            <div class="editor-settings__form-group form-group">
+                <label for="square-color">Цвет</label>
+                <input type="color" id="square-color">
+            </div>
+            <button type="button">Вперед?</button>
+        </div>
+        <canvas class="editor" id="editor"></canvas>
+        <div class="editor-tooltip">
+            Для того чтоб создать квадрат, цокните мышкой на любую точку поля если у вас не заполнено какое-то поле, то
+            параметры будут взяты случайные.
+
+            Правая кнопка мыши удаляет ваше художество
+
+            Кнопка вперед будет толкать выделеный квадрат вверх немонжко
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
