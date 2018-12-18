@@ -1,13 +1,23 @@
 h1{
     text-align: center;
+    width: 100%;
 }
 .container{
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
 }
 .editor-settings{
     padding: 10px;
     border: 2px solid black;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.form-group{
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 15px;
 }
 .editor{
     border: 2px solid black;

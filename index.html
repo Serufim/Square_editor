@@ -10,22 +10,11 @@
         <h1>Редактор квадратов</h1>
         <div class="editor-settings">
             <h2 class="editor-settings__title">Настройки</h2>
-            <div class="editor-settings__form-group form-group">
-                <label for="square-width">Ширина</label>
-                <input type="text" id="square-width">
-            </div>
-            <div class="editor-settings__form-group form-group">
-                <label for="square-color">Цвет</label>
-                <input type="color" id="square-color">
-            </div>
-            <button type="button">Вперед?</button>
+            <button type="button" id="pushButton">Вперед?</button>
         </div>
-        <canvas class="editor" id="editor"></canvas>
+        <canvas class="editor" width="800" height="600" id="editor"></canvas>
         <div class="editor-tooltip">
-            Для того чтоб создать квадрат, цокните мышкой на любую точку поля если у вас не заполнено какое-то поле, то
-            параметры будут взяты случайные.
-
-            Правая кнопка мыши удаляет ваше художество
+            Для того чтоб создать квадрат, цокните мышкой на любую точку поля.<br>
 
             Кнопка вперед будет толкать выделеный квадрат вверх немонжко
         </div>
