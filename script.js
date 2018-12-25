@@ -18,20 +18,18 @@ class Editor {
     constructor() {
         this.squares = []; //массив квадратов
         this.canvas = document.getElementById("editor"); //канвас
+        this.sizeForm = document.getElementById("size"); //Поле
         this.canvas.addEventListener('click', e => this.handleClick(e));
-        document.querySelector("#pushButton").addEventListener('click', e => this.pushSquare())
+        document.querySelector("#pushButton").addEventListener('click', e => this.resizeSquare())
         this.ctx = this.canvas.getContext('2d');
     }
 
-    pushSquare() {
-        //Толкаем квадрат вверх
+    resizeSquare() {
+        //Изменяем размер квадрата
         const {squares} = this;
         squares.forEach(item => {
             if (item.selected) {
-                if (item.leftTopPosition[1] - item.width / 2 > 0) {
-                    item.leftTopPosition[1] = item.leftTopPosition[1] - 10;
-                    item.centerPosition[1] = item.centerPosition[1] - 10;
-                }
+                item.width = parseInt(this.sizeForm.value);
             }
         });
         this.drawSquares()
@@ -51,14 +49,14 @@ class Editor {
     checkSquares(cords) {
         //Проверка попадания в квадрат
         const {squares} = this;
+        console.log(squares);
         for (let i = squares.length - 1; i >= 0; i--) {
             if ((squares[i].centerPosition[0] < cords[0] && squares[i].centerPosition[1] < cords[1]) && (squares[i].centerPosition[0] + squares[i].width > cords[0] && squares[i].centerPosition[1] + squares[i].width > cords[1])) {
                 squares.forEach(item => item.selected = false);
-                squares[i].selectSquare();
-                this.drawSquares();
-                return true
+                return squares[i]
             }
         }
+        return false
     }
 
     getCursorPosition(event) {
@@ -73,11 +71,15 @@ class Editor {
     handleClick(e) {
         //Проверяем принадлежность квадратикам
         const cords = this.getCursorPosition(e);
-        if (this.squares && this.checkSquares(cords)) {
-            //Если мы непопали в квадрат, то создаем новый
+        let square = this.checkSquares(cords);
+        console.log(square);
+        if (this.squares && square) {
+            square.selectSquare();
+            this.sizeForm.value = square.width;
         } else {
             this.createSquare(e)
         }
+        this.drawSquares();
     }
 
     createSquare(e) {

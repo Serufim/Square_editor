@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Редактор квадратов имени Льва Стоянова</title>
+    <title>Редактор квадратов имени Ильи Харченко</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,13 +10,17 @@
         <h1>Редактор квадратов</h1>
         <div class="editor-settings">
             <h2 class="editor-settings__title">Настройки</h2>
-            <button type="button" id="pushButton">Вперед?</button>
+            <label>Размеры квадрата</label><br>
+            <input type="text" id="size">
+            <button type="button" id="pushButton">Изменить размеры</button>
         </div>
-        <canvas class="editor" width="800" height="600" id="editor"></canvas>
+        <canvas class="editor" width="640" height="480" id="editor"></canvas>
         <div class="editor-tooltip">
             Для того чтоб создать квадрат, цокните мышкой на любую точку поля.<br>
 
-            Кнопка вперед будет толкать выделеный квадрат вверх немонжко
+            Для того чтоб выделить квадрат щелкните на какой-нибудь квадрат.<br>
+
+            Для того чтоб изменить размер квадрата, введите размер в поле и нажмите на кнопку "Изменить"<br>
         </div>
     </div>
     <script src="script.js"></script>
