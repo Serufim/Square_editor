@@ -5,11 +5,6 @@ class Square {
         this.color = data.color;
         this.centerPosition = [leftTopPosition[0] - this.width / 2, leftTopPosition[1] - this.width / 2];
         this.leftTopPosition = leftTopPosition;
-        this.selected = false
-    }
-
-    selectSquare() {
-        this.selected = true
     }
 }
 
@@ -19,23 +14,7 @@ class Editor {
         this.squares = []; //массив квадратов
         this.canvas = document.getElementById("editor"); //канвас
         this.canvas.addEventListener('click', e => this.handleClick(e));
-        document.querySelector("#pushButton").addEventListener('click', e => this.pushSquare())
         this.ctx = this.canvas.getContext('2d');
-    }
-
-    pushSquare() {
-        //Толкаем квадрат вверх
-        const {squares} = this;
-        squares.forEach(item => {
-            if (item.selected) {
-                if (item.leftTopPosition[1] - item.width / 2 > 0) {
-                    item.leftTopPosition[1] = item.leftTopPosition[1] - 10;
-                    item.centerPosition[1] = item.centerPosition[1] - 10;
-                }
-            }
-        });
-        this.drawSquares()
-        // pushedSquare.leftTopPosition[1]-=10;
     }
 
     getRandomColor() {
@@ -51,14 +30,14 @@ class Editor {
     checkSquares(cords) {
         //Проверка попадания в квадрат
         const {squares} = this;
-        for (let i = squares.length - 1; i >= 0; i--) {
-            if ((squares[i].centerPosition[0] < cords[0] && squares[i].centerPosition[1] < cords[1]) && (squares[i].centerPosition[0] + squares[i].width > cords[0] && squares[i].centerPosition[1] + squares[i].width > cords[1])) {
-                squares.forEach(item => item.selected = false);
-                squares[i].selectSquare();
-                this.drawSquares();
-                return true
+        if (squares.length){
+            for (let i = squares.length-1; i >-1; i--) {
+                if ((squares[i].centerPosition[0] < cords[0] && squares[i].centerPosition[1] < cords[1]) && (squares[i].centerPosition[0] + squares[i].width > cords[0] && squares[i].centerPosition[1] + squares[i].width > cords[1])) {
+                    return i
+                }
             }
         }
+        return false
     }
 
     getCursorPosition(event) {
@@ -72,17 +51,23 @@ class Editor {
 
     handleClick(e) {
         //Проверяем принадлежность квадратикам
+        const color = document.getElementById("myColor").value;
+        const {squares} = this;
         const cords = this.getCursorPosition(e);
-        if (this.squares && this.checkSquares(cords)) {
+        const squareIndex = this.checkSquares(cords);
+        if (squares && squareIndex!==false) {
             //Если мы непопали в квадрат, то создаем новый
+            squares[squareIndex].color = color;
         } else {
             this.createSquare(e)
         }
+        console.log(squares.length)
+        this.drawSquares();
     }
 
     createSquare(e) {
         //Создаем квадрат
-        let width = Math.floor(Math.random() * (40 - 10 + 1)) + 10;
+        let width = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
         let color = this.getRandomColor();
 
         //Рисуем квадрат
@@ -92,10 +77,7 @@ class Editor {
             color: color
         }, cords);
         this.squares.push(newSquare);
-        this.squares.forEach(item => item.selected = false);
-        this.drawSquares();
     }
-
 
     drawSquares() {
         //Рисуем все квадраты из массива на канвасе
@@ -104,10 +86,6 @@ class Editor {
         for (let square of this.squares) {
             ctx.fillStyle = square.color;
             ctx.fillRect(square.centerPosition[0], square.centerPosition[1], square.width, square.width);
-            if (square.selected) {
-                ctx.strokeStyle = "#000000";
-                ctx.strokeRect(square.centerPosition[0] - 1, square.centerPosition[1] - 1, square.width, square.width);
-            }
         }
     }
 }
