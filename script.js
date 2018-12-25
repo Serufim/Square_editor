@@ -30,6 +30,8 @@ class Editor {
         squares.forEach(item => {
             if (item.selected) {
                 item.width = parseInt(this.sizeForm.value);
+                //Если надо будет чтоб размеры изменялись от центра, просто удалите коментарий
+                //item.centerPosition = [item.leftTopPosition[0] - item.width / 2, item.leftTopPosition[1] - item.width / 2]
             }
         });
         this.drawSquares()
